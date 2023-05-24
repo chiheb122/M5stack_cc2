@@ -1,14 +1,21 @@
 from umqttsimple import MQTTClient
 import ubinascii
 import machine
+from configwifi import connect
 
-mqtt_broker = '192.168.116.141'
-mqtt_username = 'chiba'
+
+# Connecte le dispositif à un réseau Wi-Fi
+
+connect()
+
+
+mqtt_broker = '192.168.1.125'
+mqtt_username = 'baran'
 mqtt_password = 'class'
-mqtt_port = 50003
+mqtt_port = 1883
 
 client_id = ubinascii.hexlify(machine.unique_id())
-
+topic_pub = b'temperature'
 
 
 def connectmqtt():
@@ -21,22 +28,19 @@ def restart_and_reconnect():
   print('Failed to connect to MQTT broker. Reconnecting...')
   time.sleep(10)
   machine.reset()
-'''
-position = e.getPosition()
+
 
 
 try:
-    client = connectmqtt()
-    msg = str(e.getPosition())
-    msg2 = str(position % 360)
-    client.publish(topic_pub1, msg)
-    client.publish(topic_pub2, msg2)
-
+        client = connectmqtt()
+        topic_pub = b'temperature'
+        msg = str(+e.getPosition()) 
+        client.publish(topic_pub, msg)
 except OSError as e:
-    print("erreur connect MQTT")
+        print("erreur connect MQTT")
 
 
-'''
+
 
 
 
