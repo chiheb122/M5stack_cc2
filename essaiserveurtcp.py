@@ -36,7 +36,7 @@ lcd.clear()
 while True:
     temp, humi = c.measure()
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    s.connect(('192.168.28.227', 80))
+    s.connect(('192.168.116.227', 65000))
 
     lcd.setCursor(0, 100)
     lcd.println("La temperature est de " + str(temp), color=lcd.YELLOW)
